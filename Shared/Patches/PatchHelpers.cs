@@ -3,7 +3,10 @@
 using System;
 using System.Linq;
 using System.Reflection;
+using ClientPlugin.Logic;
 using HarmonyLib;
+using Sandbox.Game.World;
+using Sandbox.ModAPI;
 using Shared.Logging;
 using Shared.Plugin;
 using Shared.Tools;
@@ -65,21 +68,17 @@ namespace Shared.Patches
         // Called after loading configuration, but before patching
         public static void Configure()
         {
-            // Call the Configure public static method on each of your
-            // patch classes which needs one time configuration when
-            // the plugins is loaded (no world is loaded yet)
-            // For example:
-            //MyPatch.Configure();
+#if !TORCH && !DEDICATED
+            Tracker.Configure();
+#endif
         }
 
         // Called on every update
         public static void PatchUpdates()
         {
-            // Call the Update public static method on each of your
-            // patch classes which needs periodic updates, it is
-            // called on each game update (tick).
-            // For example:
-            //MyPatch.Update();
+#if !TORCH && !DEDICATED
+            Tracker.Update();
+#endif
         }
     }
 }

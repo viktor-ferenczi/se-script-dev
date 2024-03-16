@@ -4,11 +4,11 @@
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{C889318F-9835-4814-B26E-979242CAEB0C}</ProjectGuid>
+        <ProjectGuid>{98B27BCB-8B6E-4544-B352-669FF2E86517}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
         <RootNamespace>TorchPlugin</RootNamespace>
-        <AssemblyName>PluginTemplate</AssemblyName>
+        <AssemblyName>ScriptDev</AssemblyName>
         <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <LangVersion>7.3</LangVersion>

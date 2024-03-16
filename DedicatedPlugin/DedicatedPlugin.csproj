@@ -4,11 +4,11 @@
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-        <ProjectGuid>{FFB7FCA3-B168-43F4-8DBF-6247C0D331C8}</ProjectGuid>
+        <ProjectGuid>{9089C996-7B80-487D-91B4-AEB615D35641}</ProjectGuid>
         <OutputType>Library</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
         <RootNamespace>DedicatedPlugin</RootNamespace>
-        <AssemblyName>PluginTemplate</AssemblyName>
+        <AssemblyName>ScriptDev</AssemblyName>
         <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <LangVersion>7.3</LangVersion>

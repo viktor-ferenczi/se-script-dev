@@ -15,9 +15,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Logging\IPluginLogger.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Logging\LogFormatter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Logging\PluginLogger.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Patches\ExamplePatch.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Patches\ExampleServerPatch.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Patches\ExampleTranspilerPatch.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Logic\Tracker.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Logic\Script.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Patches\PatchHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Plugin\Common.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Plugin\ICommonPlugin.cs" />
@@ -36,7 +35,5 @@
     <Content Include="$(MSBuildThisFileDirectory)..\ReplaceGuidsAndRename.py">
       <Link>ReplaceGuidsAndRename.py</Link>
     </Content>
-    <Content Include="$(MSBuildThisFileDirectory)Patches\LoadData.original.il" />
-    <Content Include="$(MSBuildThisFileDirectory)Patches\LoadData.patched.il" />
   </ItemGroup>
 </Project>

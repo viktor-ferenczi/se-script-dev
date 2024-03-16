@@ -11,8 +11,8 @@ namespace ClientPlugin.GUI
 {
     public class PluginConfigDialog : MyGuiScreenBase
     {
-        private const string Caption = "PluginTemplate Configuration";
-        public override string GetFriendlyName() => "PluginTemplateConfigDialog";
+        private const string Caption = "ScriptDev Configuration";
+        public override string GetFriendlyName() => "ScriptDevConfigDialog";
 
         private MyLayoutTable layoutTable;
 

@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientPlugin", "ClientPlugin\ClientPlugin.csproj", "{8B63B129-20E9-470C-BC49-09B1EE152945}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TorchPlugin", "TorchPlugin\TorchPlugin.csproj", "{98B27BCB-8B6E-4544-B352-669FF2E86517}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DedicatedPlugin", "DedicatedPlugin\DedicatedPlugin.csproj", "{9089C996-7B80-487D-91B4-AEB615D35641}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Shared", "Shared\Shared.shproj", "{983AFED5-7BFB-47B1-82ED-C8F0EC80E34C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{75919FCB-E258-4690-ABD5-44597B3D9D65}"
+	ProjectSection(SolutionItems) = preProject
+		Edit-and-run-before-opening-solution.bat = Edit-and-run-before-opening-solution.bat
+		README.md = README.md
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8B63B129-20E9-470C-BC49-09B1EE152945}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B63B129-20E9-470C-BC49-09B1EE152945}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B63B129-20E9-470C-BC49-09B1EE152945}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B63B129-20E9-470C-BC49-09B1EE152945}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B63B129-20E9-470C-BC49-09B1EE152945}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8B63B129-20E9-470C-BC49-09B1EE152945}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{98B27BCB-8B6E-4544-B352-669FF2E86517}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98B27BCB-8B6E-4544-B352-669FF2E86517}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98B27BCB-8B6E-4544-B352-669FF2E86517}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98B27BCB-8B6E-4544-B352-669FF2E86517}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{9089C996-7B80-487D-91B4-AEB615D35641}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9089C996-7B80-487D-91B4-AEB615D35641}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9089C996-7B80-487D-91B4-AEB615D35641}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9089C996-7B80-487D-91B4-AEB615D35641}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

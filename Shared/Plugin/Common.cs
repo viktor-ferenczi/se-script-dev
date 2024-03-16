@@ -22,7 +22,7 @@ namespace Shared.Plugin
             Config = plugin.Config;
 
             GameVersion = gameVersion;
-            DataDir = Path.Combine(storageDir, "PluginTemplate");
+            DataDir = Path.Combine(storageDir, "ScriptDev");
 
             PatchHelpers.Configure();
         }
