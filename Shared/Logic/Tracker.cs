@@ -28,17 +28,35 @@ namespace ClientPlugin.Logic
 
         public static void Configure()
         {
-            MySession.OnLoading += Clear;
-            MySession.OnUnloading += Clear;
+            MySession.OnLoading += OnLoading;
+            MySession.OnUnloading += OnUnloading;
 
             MyEntities.OnEntityAdd += OnEntityAdd;
             MyEntities.OnEntityRemove += OnEntityRemove;
         }
 
-        private static void Clear()
+        private static void OnLoading()
         {
+            MySession.Static.OnReady += OnReady;
+        }
+
+        private static void OnUnloading()
+        {
+            MySession.Static.OnReady -= OnReady;
+
             Scripts.Clear();
             Updates.Clear();
+        }
+
+        private static void OnReady()
+        {
+            foreach (var entity in MyEntities.GetEntities())
+            {
+                if (entity is MyCubeGrid)
+                {
+                    OnEntityAdd(entity);
+                }
+            }
         }
 
         private static void OnEntityAdd(MyEntity entity)
@@ -136,6 +154,7 @@ namespace ClientPlugin.Logic
 
             foreach (var path in ScriptsToRemove)
             {
+                Log.Debug($"Unregistered script: {path}");
                 Scripts.Remove(path);
             }
 
@@ -179,6 +198,7 @@ namespace ClientPlugin.Logic
 
             if (!Scripts.TryGetValue(path, out script))
             {
+                Log.Debug($"Registered script: {path}");
                 script = new Script(path);
                 Scripts[path] = script;
             }

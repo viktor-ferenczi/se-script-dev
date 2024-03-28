@@ -31,13 +31,19 @@ namespace ClientPlugin.Logic
 
             try
             {
-                Modified = File.GetLastWriteTimeUtc(Path);
+                var current = File.GetLastWriteTimeUtc(Path);
+                if (current == Modified)
+                {
+                    return;
+                }
+
+                Modified = current;
                 Code = File.ReadAllText(Path);
-                Log.Debug($"Loaded script \"{Path}\", last modified {Modified:O}");
+                Log.Debug($"Loaded script from \"{Path}\", last modified {Modified:O}");
             }
             catch (Exception e)
             {
-                Log.Error($"Failed to load script \"{Path}\": {e}");
+                Log.Error($"Failed to load script from \"{Path}\": {e}");
                 Modified = default;
                 Code = null;
             }
