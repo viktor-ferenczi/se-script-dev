@@ -23,6 +23,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)MDK_Debug\ProgrammableBlockExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MDK_Debug\ProgrammableBlockProxy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MDK_Debug\Resources.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ModDebugBuild\Main.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ModDebugBuild\MyDebugScriptCompiler.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ModDebugBuild\Patch_ScriptCompiler.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ModDebugBuild\Patch_ScriptManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Patches\PatchHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Plugin\Common.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Plugin\ICommonPlugin.cs" />
