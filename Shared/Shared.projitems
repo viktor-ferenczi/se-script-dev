@@ -17,6 +17,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)Logging\PluginLogger.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Logic\Tracker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Logic\Script.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MDK_Debug\BindingException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MDK_Debug\FileDialog.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MDK_Debug\Plugin.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MDK_Debug\ProgrammableBlockExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MDK_Debug\ProgrammableBlockProxy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MDK_Debug\Resources.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Patches\PatchHelpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Plugin\Common.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Plugin\ICommonPlugin.cs" />
@@ -36,5 +42,6 @@
     <Content Include="$(MSBuildThisFileDirectory)..\ReplaceGuidsAndRename.py">
       <Link>ReplaceGuidsAndRename.py</Link>
     </Content>
+    <Content Include="$(MSBuildThisFileDirectory)MDK_Debug\README.md" />
   </ItemGroup>
 </Project>
