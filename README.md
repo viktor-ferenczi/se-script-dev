@@ -1,18 +1,20 @@
 # ScriptDev Plugin for Space Engineers
 
-## Prerequisites
-
-- [Space Engineers](https://store.steampowered.com/app/244850/Space_Engineers/)
-- [Plugin Loader](https://github.com/sepluginloader)
-
-## Features
-
 This plugin automatically updates the code in programmable blocks
 whenever the corresponding `Script.cs` changes. It is detected based
 on the file's last modification time and polled every second.
 
 Scripts of more than 100,000 characters can be loaded. This is useful
 for offline development, but not compatible with multiplayer.
+
+Please consider supporting my work on [Patreon](https://www.patreon.com/semods) or one time via [PayPal](https://www.paypal.com/paypalme/vferenczi/).
+
+*Thank you and enjoy!*
+
+## Prerequisites
+
+- [Space Engineers](https://store.steampowered.com/app/244850/Space_Engineers/)
+- [Plugin Loader](https://github.com/sepluginloader)
 
 ## Usage
 
@@ -37,3 +39,8 @@ script for release.
 - This plugin is designed solely for local script development.
 - It works only in offline and locally hosted games.
 - It is not scalable to a large number of PBs.
+
+## Want to know more?
+
+- [SE Mods Discord](https://discord.gg/PYPFPGf3Ca) FAQ, Troubleshooting, Support, Bug Reports, Discussion
+- [Plugin Loader Discord](https://discord.gg/6ETGRU3CzR) Everything about plugins
