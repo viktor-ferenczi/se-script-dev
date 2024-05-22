@@ -24,7 +24,7 @@ namespace Shared.Plugin
             GameVersion = gameVersion;
             DataDir = Path.Combine(storageDir, "ScriptDev");
 
-            PatchHelpers.Configure();
+            PatchHelpers.Configure(plugin);
         }
     }
 }

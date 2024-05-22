@@ -3,7 +3,7 @@
 using System;
 using System.Linq;
 using System.Reflection;
-using ClientPlugin.Logic;
+using Shared.Logic;
 using HarmonyLib;
 using Sandbox.Game.World;
 using Sandbox.ModAPI;
@@ -66,11 +66,10 @@ namespace Shared.Patches
         }
 
         // Called after loading configuration, but before patching
-        public static void Configure()
+        public static void Configure(ICommonPlugin plugin)
         {
-#if !TORCH && !DEDICATED
-            Tracker.Configure();
-#endif
+            Tracker.Configure(plugin);
+            Script.Configure(plugin);
         }
 
         // Called on every update
