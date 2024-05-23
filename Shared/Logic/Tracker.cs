@@ -8,14 +8,17 @@ using Sandbox.Game.Entities.Blocks;
 using Sandbox.Game.World;
 using Sandbox.ModAPI;
 using Shared.Logging;
+using Shared.Plugin;
 using VRage.FileSystem;
 using VRage.Game.Entity;
 
-namespace ClientPlugin.Logic
+namespace Shared.Logic
 {
     public static class Tracker
     {
-        private static IPluginLogger Log => Plugin.Instance.Log;
+        private static ICommonPlugin Plugin;
+        private static IPluginLogger Log => Plugin.Log;
+
         private static string IngameScriptsDir => Path.Combine(MyFileSystem.UserDataPath, "IngameScripts", "local");
 
         #region "Tracking PBs"
@@ -26,8 +29,10 @@ namespace ClientPlugin.Logic
         private static readonly Dictionary<IMyProgrammableBlock, DateTime> Updates = new Dictionary<IMyProgrammableBlock, DateTime>(64);
         private static readonly Dictionary<IMyProgrammableBlock, DateTime> UpdatesToModify = new Dictionary<IMyProgrammableBlock, DateTime>(64);
 
-        public static void Configure()
+        public static void Configure(ICommonPlugin plugin)
         {
+            Plugin = plugin;
+
             MySession.OnLoading += OnLoading;
             MySession.OnUnloading += OnUnloading;
 
@@ -115,14 +120,12 @@ namespace ClientPlugin.Logic
 
         private static void Register(IMyProgrammableBlock pb)
         {
-
             Updates[pb] = default;
             Log.Debug($"Registered PB \"{pb.CustomName}\" [{pb.EntityId}]");
         }
 
         private static void Unregister(IMyProgrammableBlock pb)
         {
-
             Updates.Remove(pb);
             Log.Debug($"Unregistered PB \"{pb.CustomName}\" [{pb.EntityId}]");
         }
@@ -133,7 +136,7 @@ namespace ClientPlugin.Logic
 
         public static void Update()
         {
-            if (Plugin.Instance.Tick % 60 == 0)
+            if (Plugin.Tick % 60 == 0)
             {
                 UpdateScripts();
                 UpdatePBs();

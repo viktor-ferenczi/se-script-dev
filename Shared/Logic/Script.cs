@@ -1,12 +1,14 @@
 using System;
 using System.IO;
 using Shared.Logging;
+using Shared.Plugin;
 
-namespace ClientPlugin.Logic
+namespace Shared.Logic
 {
     public class Script
     {
-        private static IPluginLogger Log => Plugin.Instance.Log;
+        private static ICommonPlugin Plugin;
+        private static IPluginLogger Log => Plugin.Log;
 
         public readonly string Path;
         public DateTime Modified { get; private set; }
@@ -18,6 +20,11 @@ namespace ClientPlugin.Logic
         {
             Path = path;
             CheckUpdate();
+        }
+
+        public static void Configure(ICommonPlugin plugin)
+        {
+            Plugin = plugin;
         }
 
         public void CheckUpdate()
