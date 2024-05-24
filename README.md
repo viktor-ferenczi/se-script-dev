@@ -18,7 +18,7 @@ Please consider supporting my work on [Patreon](https://www.patreon.com/semods) 
 
 ## Usage
 
-Enable the **ScriptDev** plugin Plugin Loader, apply, restart the game.
+Enable the **ScriptDev** plugin in Plugin Loader, apply the change and restart the game.
 
 The name of the PB must include the script's name in square brackets.
 For example: `Programmable Block [Name Of My Script]`
