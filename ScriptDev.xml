@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<PluginData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="GitHubPlugin">
+  <Id>viktor-ferenczi/se-script-dev</Id>
+   
+  <FriendlyName>ScriptDev</FriendlyName>
+  <Author>Viktor</Author>
+  <SourceDirectories>
+    <Directory>Shared</Directory>
+    <Directory>ClientPlugin</Directory>
+  </SourceDirectories>
+  <Tooltip>Automatically updates the code in programmable blocks.</Tooltip>
+  <Description>This plugin automatically updates the code in programmable blocks whenever the corresponding Script.cs file changes.
+
+More information:
+https://github.com/viktor-ferenczi/se-script-dev
+
+Companion script merger and minifier tool:
+https://github.com/viktor-ferenczi/se-script-merge
+
+For support join the SE Mods Discord:
+https://discord.gg/PYPFPGf3Ca
+
+Please consider supporting my work on Patreon:
+https://www.patreon.com/semods
+
+One time support via PayPal:
+https://www.paypal.com/paypalme/vferenczi/
+
+Thank you!
+  </Description>
+
+  <Commit>bf56ad22fbd49eac1964d71f97a50cdc4a380873</Commit>
+
+</PluginData>
