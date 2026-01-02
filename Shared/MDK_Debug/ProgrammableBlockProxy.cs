@@ -141,7 +141,7 @@ namespace MDK.Debug
             CreateIgcContext();
             Program.IGC_ContextGetter = () => _igcContextCache;
 
-            ProgrammableBlock.RunSandboxedProgramAction(p =>
+            var action = new Action<IMyGridProgram>(p =>
             {
                 constructor.Invoke(p, null);
 
@@ -150,7 +150,11 @@ namespace MDK.Debug
                     Echo(MyTexts.GetString(MySpaceTexts.ProgrammableBlock_Exception_NoMain));
                     OnProgramTermination(MyProgrammableBlock.ScriptTerminationReason.NoEntryPoint);
                 }
-            }, out var response);
+            });
+
+            object[] args = [action, null];
+            _reflections.RunSandboxedProgramActionMethod.Invoke(ProgrammableBlock, args);
+            var response = (string)args[1];
             SetDetailedInfo(response);
             HasLoadedProgram = true;
             ProgrammableBlock.RaisePropertiesChanged();
@@ -173,6 +177,7 @@ namespace MDK.Debug
             const string StaticPropertName = "Static";
             const string EvictContextForMethodName = "EvictContextFor";
             const string GetOrMakeContextForMethodName = "GetOrMakeContextFor";
+            const string RunSandboxedProgramActionMethodName = "RunSandboxedProgramAction";
 
             static FieldInfo GetFieldInfo(Type type, string fieldName, Type fieldType)
             {
@@ -227,6 +232,7 @@ namespace MDK.Debug
                 IgcStaticProperty = GetPropertyInfo(componentType, StaticPropertName, componentType);
                 IgcEvictContextMethod = GetMethodInfo(componentType, EvictContextForMethodName, typeof(void), new[] {typeof(MyProgrammableBlock)});
                 IgcGetOrMakeContextForMethod = GetMethodInfo(componentType, GetOrMakeContextForMethodName, null, new[] {typeof(MyProgrammableBlock)});
+                RunSandboxedProgramActionMethod = GetMethodInfo(type, RunSandboxedProgramActionMethodName, typeof(void), new[] {typeof(Action<IMyGridProgram>), typeof(string).MakeByRefType()});
             }
 
             public FieldInfo StorageDataField { get; }
@@ -241,6 +247,7 @@ namespace MDK.Debug
             public MethodInfo IgcEvictContextMethod { get; }
             public MethodInfo IgcGetOrMakeContextForMethod { get; }
             public MethodInfo OnProgramTerminationMethod { get; }
+            public MethodInfo RunSandboxedProgramActionMethod { get; }
 
             public MethodInfo GetResetMethod(object runtime)
             {
