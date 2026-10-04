@@ -539,7 +539,14 @@
     <Target Name="AfterBuild">
     </Target>
     -->
-    <PropertyGroup>
-        <PostBuildEvent>call "$(ProjectDir)\deploy.bat" "$(TargetPath)" "$(SolutionName)"</PostBuildEvent>
+    <!-- Deploys only if the Torch property is set (see Directory.Build.props) -->
+    <Target Name="ValidateDeployProps" BeforeTargets="PrepareForBuild">
+        <Message Condition="'$(Torch)' == ''"
+                 Text="Torch is not set, the plugin will not be deployed." />
+        <Warning Condition="'$(Torch)' != '' And !Exists('$(Torch)')"
+                 Text="Torch folder &quot;$(Torch)&quot; does not exist, the plugin will not be deployed." />
+    </Target>
+    <PropertyGroup Condition="'$(Torch)' != '' And Exists('$(Torch)')">
+        <PostBuildEvent>call "$(ProjectDir)\deploy.bat" "$(TargetPath)" "$(SolutionName)" "$(Torch)"</PostBuildEvent>
     </PropertyGroup>
 </Project>

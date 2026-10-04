@@ -26,10 +26,10 @@ Project build configuration, building the project:
 - In development this code is built by the `dotnet` command line tool or by an IDE like VSCode, JetBrains Rider or Visual Studio. 
 - In production on the client this code is built by the Pulsar plugin loader directly on the player's machine.
 - Dedicated Server and Torch are using pre-build Release DLLs.
-- Then the DLL produced by the build is deployed by the `Deploy.bat` script of the corresponding project:
-  - Client: Into Pulsar's `Local` plugin folder
-  - Dedicated: Into the Dedicated Server's `Plugins` folder
-  - Torch: Into Torch's `Plugins` folder
+- A plain build deploys nothing. Deployment is opt-in, only when the target folder is set in `Directory.Build.props.user` or passed with `-p:`:
+  - Client: into Pulsar's `Local` plugin folder by the `DeployPlugin` target, if `Pulsar` is set; otherwise load the working copy through a Pulsar development folder
+  - Dedicated: into the Torch Dedicated Server's `Plugins` folder by its `deploy.bat`, if `Torch` is set
+  - Torch: into Torch's `Plugins` folder by its `deploy.bat`, if `Torch` is set
 
 Runtime patching:
 - The patching library used is Harmony, also called HarmonyLib.

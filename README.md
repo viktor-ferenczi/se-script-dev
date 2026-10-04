@@ -40,6 +40,26 @@ script for release.
 - It works only in offline and locally hosted games.
 - It is not scalable to a large number of PBs.
 
+## Development
+
+The build finds the game through Steam. To override its location or set the deploy folders
+below, use `Directory.Build.props.user`, which is not committed. `setup.py` creates it.
+
+Load the working copy through a Pulsar development folder: start Pulsar with `-sources`,
+then add this repository with the Sources button.
+
+Builds deploy nothing by default. To deploy, set the target folder in
+`Directory.Build.props.user` or pass it on the command line:
+
+- `Pulsar`, for example `dotnet build -p:Pulsar=$HOME/.config/Pulsar`: the client plugin goes to
+  `<Pulsar>/Legacy/Local/ScriptDev/` (net48) or `<Pulsar>/Interim/Local/ScriptDev/` (net10.0,
+  falls back to `Legacy` if there is no `Interim` folder)
+- `Torch`: the Torch plugin goes to `<Torch>/Plugins/ScriptDev/`, the Dedicated Server plugin
+  to `<Torch>/DedicatedServer64/Plugins/`
+
+The Torch and Dedicated Server projects are Windows only. They build against the `Torch`
+folder link created by `Edit-and-run-before-opening-solution.bat`.
+
 ## Want to know more?
 
 - [SE Mods Discord](https://discord.gg/PYPFPGf3Ca) FAQ, Troubleshooting, Support, Bug Reports, Discussion
