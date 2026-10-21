@@ -8,8 +8,10 @@
     <Directory>Shared</Directory>
     <Directory>ClientPlugin</Directory>
   </SourceDirectories>
-  <Tooltip>Automatically updates the code in programmable blocks.</Tooltip>
+  <Tooltip>Automatically updates the code in programmable blocks. Publishes local scripts and mods.</Tooltip>
   <Description>This plugin automatically updates the code in programmable blocks whenever the corresponding Script.cs file changes.
+
+The Publish button in the main menu and the in-game menu lists your local scripts and mods, shows which ones changed since their last upload, and publishes or updates them on the Workshop.
 
 More information:
 https://github.com/viktor-ferenczi/se-script-dev

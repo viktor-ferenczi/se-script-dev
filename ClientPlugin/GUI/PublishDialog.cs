@@ -20,6 +20,7 @@ namespace ClientPlugin.GUI
 
         private static readonly string[] ColumnNames =
         {
+            "Type",
             "Name",
             "Workshop ID",
             "Visibility",
@@ -79,7 +80,7 @@ namespace ClientPlugin.GUI
                 ColumnsCount = ColumnNames.Length,
                 VisibleRowsCount = 15,
             };
-            table.SetCustomColumnWidths(new[] { 0.31f, 0.14f, 0.11f, 0.16f, 0.16f, 0.12f });
+            table.SetCustomColumnWidths(new[] { 0.07f, 0.27f, 0.13f, 0.11f, 0.15f, 0.15f, 0.12f });
             for (var i = 0; i < ColumnNames.Length; i++)
                 table.SetColumnName(i, new StringBuilder(ColumnNames[i]));
             table.ItemSelected += (_, __) => UpdateButtons();
@@ -178,12 +179,13 @@ namespace ClientPlugin.GUI
 
         private void FillTable()
         {
-            var selectedName = SelectedItem?.Name;
+            var selected = SelectedItem;
 
             table.Clear();
             foreach (var item in items)
             {
                 var row = new MyGuiControlTable.Row(item);
+                AddCell(row, item.Kind.ToString());
                 AddCell(row, item.Name, item.Path);
                 AddCell(row, string.Join(", ", item.WorkshopIds.Select(id => id.Id)));
                 AddCell(row, item.WorkshopItem?.Visibility.ToString() ?? "");
@@ -192,7 +194,7 @@ namespace ClientPlugin.GUI
                 AddCell(row, FormatStatus(item));
                 table.Add(row);
 
-                if (item.Name == selectedName)
+                if (item.Kind == selected?.Kind && item.Name == selected.Name)
                     table.SelectedRow = row;
             }
 

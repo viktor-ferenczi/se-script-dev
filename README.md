@@ -37,13 +37,16 @@ script for release.
 ## Publishing to the Workshop
 
 The **Publish** button in the main menu and in the in-game (Escape) menu opens a list
-of your local scripts. For each one it shows its Workshop ID, its visibility, when it
-was last changed locally and when it was last published, so you can see which scripts
-have changes waiting to be uploaded.
+of your local scripts and local mods. For each one it shows its Workshop ID, its
+visibility, when it was last changed locally and when it was last published, so you can
+see which ones have changes waiting to be uploaded.
 
-Select a script and press **Publish** to upload it. This goes through the game's own
-publish steps: the confirmation, the tags and the upload target, then the result.
-A script that is already on the Workshop gets updated and keeps its visibility there.
+Local mods are the folders in `%AppData%\SpaceEngineers\Mods`, the same ones the
+game's Mods screen lists.
+
+Select a script or mod and press **Publish** to upload it. This goes through the game's
+own publish steps: the confirmation, the tags and the upload target, then the result.
+An item that is already on the Workshop gets updated and keeps its visibility there.
 A new one gets the visibility chosen below the list, which is **Private** by default,
 so you can check it before making it public on its Workshop page.
 
