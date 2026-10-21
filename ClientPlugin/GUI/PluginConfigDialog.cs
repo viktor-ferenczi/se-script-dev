@@ -53,7 +53,7 @@ namespace ClientPlugin.GUI
             AddCaption(Caption);
 
             var config = Common.Config;
-            CreateCheckbox(out enabledLabel, out enabledCheckbox, config.Enabled, value => config.Enabled = value, "Enabled", "Enable the plugin");
+            CreateCheckbox(out enabledLabel, out enabledCheckbox, config.Enabled, value => config.Enabled = value, "Enabled", "Turns the live script updates on and off");
 
             OnEnableChanged();
 

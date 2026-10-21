@@ -31,6 +31,8 @@ offline development but doesn't work in multiplayer.
 
 - It works only in offline and locally hosted games.
 - It isn't meant for a large number of programmable blocks.
+- To pause it, untick **Enabled** in the plugin's settings. Changes saved meanwhile
+  reach the blocks once you tick it again.
 
 The [In-game Script Merge Tool](https://github.com/viktor-ferenczi/se-script-merge)
 lets you write scripts in a proper IDE: merge a script from several files, share code
