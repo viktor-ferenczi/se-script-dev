@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Text;
 using ClientPlugin.GUI;
@@ -5,59 +6,54 @@ using HarmonyLib;
 using Sandbox.Graphics.GUI;
 using SpaceEngineers.Game.GUI;
 using VRage.Game;
-using VRage.Utils;
 using VRageMath;
 
 namespace ClientPlugin.Patches
 {
-    // Adds a Publish button right above the last button of the main menu and the in-game menu
+    // Adds a Publish button to the right of a vanilla button of the main menu and the in-game menu,
+    // without moving any of the vanilla buttons
     // ReSharper disable once UnusedType.Global
     [HarmonyPatch(typeof(MyGuiScreenMainMenu))]
     public static class MainMenuPatch
     {
+        // Publishing used to be reached through the Load Game screen
         // ReSharper disable once UnusedMember.Local
         [HarmonyPostfix]
         [HarmonyPatch("CreateMainMenu")]
-        private static void CreateMainMenuPostfix(
-            MyGuiScreenMainMenu __instance,
-            ref Vector2 lastButtonPosition
-        )
+        private static void CreateMainMenuPostfix(MyGuiScreenMainMenu __instance)
         {
-            AddButton(__instance, lastButtonPosition);
+            AddButtonNextTo(__instance, "LoadWorld");
         }
 
         // ReSharper disable once UnusedMember.Local
         [HarmonyPostfix]
         [HarmonyPatch("CreateInGameMenu")]
-        private static void CreateInGameMenuPostfix(
-            MyGuiScreenMainMenu __instance,
-            ref Vector2 lastButtonPosition
-        )
+        private static void CreateInGameMenuPostfix(MyGuiScreenMainMenu __instance)
         {
-            AddButton(__instance, lastButtonPosition);
+            AddButtonNextTo(__instance, "Options");
         }
 
-        // The buttons above the last one move up to make room, because Pulsar already moves
-        // the last button down for its own one and there is no space left below on 16:9 screens
-        private static void AddButton(MyGuiScreenMainMenu screen, Vector2 last)
+        // The horizontal gap is the same as the vertical one between the menu buttons
+        private static void AddButtonNextTo(MyGuiScreenMainMenu screen, string buttonName)
         {
-            foreach (var button in screen.Controls.OfType<MyGuiControlButton>())
-            {
-                if (button.Position.X == last.X && button.Position.Y < last.Y)
-                    button.Position -= MyGuiConstants.MENU_BUTTONS_POSITION_DELTA;
-            }
+            var neighbor = screen
+                .Controls.OfType<MyGuiControlButton>()
+                .FirstOrDefault(button => button.Name == buttonName);
+            if (neighbor == null)
+                return;
 
-            var position = last - MyGuiConstants.MENU_BUTTONS_POSITION_DELTA;
+            var gap = Math.Abs(MyGuiConstants.MENU_BUTTONS_POSITION_DELTA.Y) - neighbor.Size.Y;
             screen.Controls.Add(
                 new MyGuiControlButton(
-                    position,
+                    neighbor.Position + new Vector2(neighbor.Size.X + gap, 0f),
                     MyGuiControlButtonStyleEnum.StripeLeft,
-                    originAlign: MyGuiDrawAlignEnum.HORISONTAL_CENTER_AND_VERTICAL_BOTTOM,
+                    originAlign: neighbor.OriginAlign,
                     text: new StringBuilder("Publish"),
                     toolTip: "Publish local scripts and mods to the Workshop (ScriptDev)",
                     onButtonClick: _ => MyGuiSandbox.AddScreen(new PublishDialog())
                 )
                 {
+                    Name = "ScriptDevPublish",
                     BorderEnabled = false,
                     BorderSize = 0,
                     BorderHighlightEnabled = false,

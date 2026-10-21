@@ -136,7 +136,7 @@ namespace Shared.Logic
 
         public static void Update()
         {
-            if (Plugin.Tick % 60 == 0)
+            if (Plugin.Config.Enabled && Plugin.Tick % 60 == 0)
             {
                 UpdateScripts();
                 UpdatePBs();

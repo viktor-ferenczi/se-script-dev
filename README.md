@@ -1,11 +1,11 @@
 # ScriptDev Plugin for Space Engineers
 
-This plugin automatically updates the code in programmable blocks
-whenever the corresponding `Script.cs` changes. It is detected based
-on the file's last modification time and polled every second.
+Tools for programmable block script and mod developers:
 
-Scripts of more than 100,000 characters can be loaded. This is useful
-for offline development, but not compatible with multiplayer.
+- **Live script updates:** programmable blocks pick up the changes you save to their
+  `Script.cs`, within a second.
+- **Publishing:** a **Publish** button in the main menu lists your local scripts and mods,
+  shows which ones changed since their last upload, and publishes them to the Workshop.
 
 Please consider supporting my work on [Patreon](https://www.patreon.com/semods) or one time via [PayPal](https://www.paypal.com/paypalme/vferenczi/).
 
@@ -14,47 +14,42 @@ Please consider supporting my work on [Patreon](https://www.patreon.com/semods) 
 ## Prerequisites
 
 - [Space Engineers](https://store.steampowered.com/app/244850/Space_Engineers/)
-- [Plugin Loader](https://github.com/sepluginloader)
+- [Pulsar](https://github.com/SpaceGT/Pulsar)
 
-## Usage
+Enable the **ScriptDev** plugin in Pulsar and restart the game.
 
-Enable the **ScriptDev** plugin in Plugin Loader, apply the change and restart the game.
+## Live script updates
 
-The name of the PB must include the script's name in square brackets.
-For example: `Programmable Block [Name Of My Script]`
+Put the script's name in square brackets into the name of the programmable block,
+for example `Programmable Block [Name Of My Script]`. For a script in a subfolder,
+separate the folders by forward slashes: `Programmable Block [Script Subdir/Name Of My Script]`.
 
-Script subdirectories also work, separate them by forward slashes.
-For example: `Programmable Block [Script Subdir/Name Of My Script]`
+Scripts are under `%AppData%\SpaceEngineers\IngameScripts\local`. The plugin checks the
+modification time of each `Script.cs` every second and loads the new code into the
+blocks using it. Scripts longer than 100,000 characters load too, which is useful for
+offline development but doesn't work in multiplayer.
 
-Scripts are under this folder: `%AppData%\SpaceEngineers\IngameScripts\local`
+- It works only in offline and locally hosted games.
+- It isn't meant for a large number of programmable blocks.
+- To pause it, untick **Enabled** in the plugin's settings. Changes saved meanwhile
+  reach the blocks once you tick it again.
 
-Use the [In-game Script Merge Tool](https://github.com/viktor-ferenczi/se-script-merge)
-for convenient in-game script development in a proper IDE. It allows for
-merging your script from multiple files, sharing code between scripts,
-introducing unit tests not copied into the script and minifying your 
-script for release.
+The [In-game Script Merge Tool](https://github.com/viktor-ferenczi/se-script-merge)
+lets you write scripts in a proper IDE: merge a script from several files, share code
+between scripts, keep unit tests out of the script and minify it for release.
 
 ## Publishing to the Workshop
 
-The **Publish** button in the main menu and in the in-game (Escape) menu opens a list
-of your local scripts and local mods. For each one it shows its Workshop ID, its
-visibility, when it was last changed locally and when it was last published, so you can
-see which ones have changes waiting to be uploaded.
+The **Publish** button is to the right of **Load Game** in the main menu, and to the
+right of **Options** in the in-game menu.
 
-Local mods are the folders in `%AppData%\SpaceEngineers\Mods`, the same ones the
-game's Mods screen lists.
+![The Publish to Workshop dialog](Docs/images/dialog.png)
 
-Select a script or mod and press **Publish** to upload it. This goes through the game's
-own publish steps: the confirmation, the tags and the upload target, then the result.
-An item that is already on the Workshop gets updated and keeps its visibility there.
-A new one gets the visibility chosen below the list, which is **Private** by default,
-so you can check it before making it public on its Workshop page.
+Select a script or mod and press **Publish**. The upload goes through the game's own
+publish screens. New items are **Private** by default, so you can check them before
+making them public. Updates keep the visibility the item already has.
 
-## Remarks
-
-- This plugin is designed solely for local script development.
-- It works only in offline and locally hosted games.
-- It is not scalable to a large number of PBs.
+See [Publishing scripts and mods](Docs/Publishing.md) for the details.
 
 ## Development
 
