@@ -65,8 +65,7 @@ namespace ClientPlugin.GUI
                 OriginAlign = MyGuiDrawAlignEnum.HORISONTAL_LEFT_AND_VERTICAL_TOP,
                 TextAlign = MyGuiDrawAlignEnum.HORISONTAL_LEFT_AND_VERTICAL_TOP,
                 TextBoxAlign = MyGuiDrawAlignEnum.HORISONTAL_LEFT_AND_VERTICAL_TOP,
-                // TODO: Add 2 short lines of text here if the player needs to know something. Ask for feedback here. Etc.
-                Text = new StringBuilder("\r\nTODO")
+                Text = new StringBuilder("\r\nLive script updates: put the script's name in square brackets into the name\r\nof a programmable block, for example: Programmable Block [My Script]\r\n\r\nPublishing: use the Publish button next to Load Game in the main menu.")
             };
 
             closeButton = new MyGuiControlButton(originAlign: MyGuiDrawAlignEnum.HORISONTAL_RIGHT_AND_VERTICAL_CENTER, text: MyTexts.Get(MyCommonTexts.Ok), onButtonClick: OnOk);
@@ -111,8 +110,8 @@ namespace ClientPlugin.GUI
         private void LayoutControls()
         {
             layoutTable = new MyLayoutTable(this, new Vector2(-0.4f, -0.4f), new Vector2(0.8f, 0.8f));
-            layoutTable.SetColumnWidths(120f, 880f);
-            layoutTable.SetRowHeights(150f, 60f, /* TODO: Add an item for each new row */ 150f);
+            layoutTable.SetColumnWidthsNormalized(120f, 880f);
+            layoutTable.SetRowHeights(150f, 150f, /* TODO: Add an item for each new row */ 150f);
 
             layoutTable.Add(enabledCheckbox, MyAlignH.Left, MyAlignV.Center, 0, 0);
             layoutTable.Add(enabledLabel, MyAlignH.Left, MyAlignV.Center, 0, 1);
@@ -127,7 +126,7 @@ namespace ClientPlugin.GUI
 
 
             layoutTable.Add(infoText, MyAlignH.Left, MyAlignV.Top, row++, 0, colSpan: 2);
-            layoutTable.Add(closeButton, MyAlignH.Center, MyAlignV.Center, row, 1, colSpan: 2);
+            layoutTable.Add(closeButton, MyAlignH.Center, MyAlignV.Center, row, 0, colSpan: 2);
         }
     }
 }
