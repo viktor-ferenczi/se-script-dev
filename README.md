@@ -74,4 +74,4 @@ folder link created by `Edit-and-run-before-opening-solution.bat`.
 ## Want to know more?
 
 - [SE Mods Discord](https://discord.gg/PYPFPGf3Ca) FAQ, Troubleshooting, Support, Bug Reports, Discussion
-- [Plugin Loader Discord](https://discord.gg/6ETGRU3CzR) Everything about plugins
+- [Pulsar Discord](https://discord.gg/z8ZczP2YZY) Everything about plugins
