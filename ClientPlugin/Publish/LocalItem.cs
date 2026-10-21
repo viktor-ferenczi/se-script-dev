@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Sandbox.Engine.Networking;
 using Sandbox.Game.GUI;
+using VRage.FileSystem;
 using VRage.Game;
 using VRage.GameServices;
 
@@ -12,6 +13,7 @@ namespace ClientPlugin.Publish
     public enum LocalItemKind
     {
         Script,
+        Mod,
     }
 
     // A local folder which can be published to the Workshop
@@ -60,7 +62,26 @@ namespace ClientPlugin.Publish
                 MyBlueprintUtils.SCRIPT_FOLDER_LOCAL,
                 items
             );
+            ListMods(items);
             return items;
+        }
+
+        // Same as the vanilla Mods screen: every non-empty folder in the Mods folder
+        private static void ListMods(List<LocalItem> items)
+        {
+            var root = MyFileSystem.ModsPath;
+            if (!Directory.Exists(root))
+                return;
+
+            foreach (
+                var path in Directory
+                    .EnumerateDirectories(root)
+                    .OrderBy(p => p, StringComparer.OrdinalIgnoreCase)
+            )
+            {
+                if (Directory.EnumerateFileSystemEntries(path).Any())
+                    items.Add(new LocalItem(LocalItemKind.Mod, root, path));
+            }
         }
 
         // Scripts can be organized into subfolders, but a script's own folder is not searched further

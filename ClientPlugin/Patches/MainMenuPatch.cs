@@ -54,7 +54,7 @@ namespace ClientPlugin.Patches
                     MyGuiControlButtonStyleEnum.StripeLeft,
                     originAlign: MyGuiDrawAlignEnum.HORISONTAL_CENTER_AND_VERTICAL_BOTTOM,
                     text: new StringBuilder("Publish"),
-                    toolTip: "Publish local scripts to the Workshop (ScriptDev)",
+                    toolTip: "Publish local scripts and mods to the Workshop (ScriptDev)",
                     onButtonClick: _ => MyGuiSandbox.AddScreen(new PublishDialog())
                 )
                 {
