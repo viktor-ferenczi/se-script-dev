@@ -12,6 +12,8 @@ In the main menu, the **Publish** button is to the right of **Load Game**.
 
 In a game, press Escape: the button is above **Save**.
 
+![Publish button above Save in the in-game menu](images/ingame-menu.png)
+
 ## The list
 
 ![The Publish to Workshop dialog](images/dialog.png)
