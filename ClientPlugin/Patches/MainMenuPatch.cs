@@ -10,7 +10,7 @@ using VRageMath;
 
 namespace ClientPlugin.Patches
 {
-    // Adds a Publish button to the right of a vanilla button of the main menu and the in-game menu,
+    // Adds a Publish button beside Load Game in the main menu and above Save in the in-game menu,
     // without moving any of the vanilla buttons
     // ReSharper disable once UnusedType.Global
     [HarmonyPatch(typeof(MyGuiScreenMainMenu))]
@@ -22,7 +22,7 @@ namespace ClientPlugin.Patches
         [HarmonyPatch("CreateMainMenu")]
         private static void CreateMainMenuPostfix(MyGuiScreenMainMenu __instance)
         {
-            AddButtonNextTo(__instance, "LoadWorld");
+            AddPublishButton(__instance, "LoadWorld", above: false);
         }
 
         // ReSharper disable once UnusedMember.Local
@@ -30,11 +30,15 @@ namespace ClientPlugin.Patches
         [HarmonyPatch("CreateInGameMenu")]
         private static void CreateInGameMenuPostfix(MyGuiScreenMainMenu __instance)
         {
-            AddButtonNextTo(__instance, "Options");
+            AddPublishButton(__instance, "SaveWorld", above: true);
         }
 
         // The horizontal gap is the same as the vertical one between the menu buttons
-        private static void AddButtonNextTo(MyGuiScreenMainMenu screen, string buttonName)
+        private static void AddPublishButton(
+            MyGuiScreenMainMenu screen,
+            string buttonName,
+            bool above
+        )
         {
             var neighbor = screen
                 .Controls.OfType<MyGuiControlButton>()
@@ -43,9 +47,13 @@ namespace ClientPlugin.Patches
                 return;
 
             var gap = Math.Abs(MyGuiConstants.MENU_BUTTONS_POSITION_DELTA.Y) - neighbor.Size.Y;
+            // The column beside the pause menu is used by In Game World Loading.
+            var offset = above
+                ? -MyGuiConstants.MENU_BUTTONS_POSITION_DELTA
+                : new Vector2(neighbor.Size.X + gap, 0f);
             screen.Controls.Add(
                 new MyGuiControlButton(
-                    neighbor.Position + new Vector2(neighbor.Size.X + gap, 0f),
+                    neighbor.Position + offset,
                     MyGuiControlButtonStyleEnum.StripeLeft,
                     originAlign: neighbor.OriginAlign,
                     text: new StringBuilder("Publish"),

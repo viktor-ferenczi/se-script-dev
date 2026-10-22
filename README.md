@@ -40,8 +40,8 @@ between scripts, keep unit tests out of the script and minify it for release.
 
 ## Publishing to the Workshop
 
-The **Publish** button is to the right of **Load Game** in the main menu, and to the
-right of **Options** in the in-game menu.
+The **Publish** button is to the right of **Load Game** in the main menu, and above
+**Save** in the in-game menu.
 
 ![The Publish to Workshop dialog](Docs/images/dialog.png)
 
