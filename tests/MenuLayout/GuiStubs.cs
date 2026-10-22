@@ -10,8 +10,6 @@ namespace VRageMath
 
         public static Vector2 operator -(Vector2 a, Vector2 b) => new(a.X - b.X, a.Y - b.Y);
 
-        public static Vector2 operator -(Vector2 v) => new(-v.X, -v.Y);
-
         public static Vector2 operator *(int n, Vector2 v) => new(n * v.X, n * v.Y);
     }
 
@@ -21,8 +19,21 @@ namespace VRageMath
     }
 }
 
+namespace VRage
+{
+    public static class MyTexts
+    {
+        public static string GetString(string id) => "Charger une partie";
+    }
+}
+
 namespace VRage.Game
 {
+    public static class MyCommonTexts
+    {
+        public static string ScreenMenuButtonLoadGame = "LoadGame";
+    }
+
     public enum MyGuiControlButtonStyleEnum
     {
         Default,
@@ -76,6 +87,7 @@ namespace Sandbox.Graphics.GUI
         public Vector2 Position;
         public Vector2 Size;
         public string Name = "";
+        public string Text = "";
         public int OriginAlign;
         public bool BorderEnabled,
             BorderHighlightEnabled;
@@ -92,6 +104,7 @@ namespace Sandbox.Graphics.GUI
         )
         {
             Position = position;
+            Text = text?.ToString();
             Size = new Vector2(
                 (style == MyGuiControlButtonStyleEnum.StripeLeft ? 286f : 281f) / 1600,
                 62f / 1200

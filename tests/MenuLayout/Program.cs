@@ -1,13 +1,16 @@
 using System.Reflection;
+using System.Text;
 using ClientPlugin.Patches;
 using Sandbox.Graphics.GUI;
 using SpaceEngineers.Game.GUI;
+using VRage;
+using VRage.Game;
 using VRageMath;
 
 var failures = 0;
 foreach (var multiplayer in new[] { false, true })
 foreach (var inGameExit in new[] { false, true })
-foreach (var scriptDevFirst in new[] { false, true })
+foreach (var worldLoading in new[] { false, true })
 {
     var menu = new MyGuiScreenMainMenu();
     // Translate the shared X origin; Y includes the 54px fullscreen margin and 0.043 offset.
@@ -25,14 +28,16 @@ foreach (var scriptDevFirst in new[] { false, true })
                 Name = rows[i],
             }
         );
-    var vanilla = menu.Controls.ToDictionary(button => button.Name, button => button.Position);
-    if (scriptDevFirst)
-        Patch(menu, "CreateInGameMenuPostfix");
     // InGameWorldLoading b31a23d: Default buttons are center-bottom aligned.
-    for (var i = 0; i < 3; i++)
+    for (var i = 0; worldLoading && i < 3; i++)
         menu.Controls.Add(
             new MyGuiControlButton(
-                new Vector2(0.3f, 0.873f - (inGameExit ? 0.06f : 0f) + i * 0.06f)
+                new Vector2(0.3f, 0.873f - (inGameExit ? 0.06f : 0f) + i * 0.06f),
+                text: new StringBuilder(
+                    i == 1
+                        ? MyTexts.GetString(MyCommonTexts.ScreenMenuButtonLoadGame)
+                        : $"WorldLoading{i}"
+                )
             )
             {
                 Name = $"WorldLoading{i}",
@@ -42,19 +47,26 @@ foreach (var scriptDevFirst in new[] { false, true })
         menu.Controls.Add(
             new MyGuiControlButton(new Vector2(0.3f, 0.993f)) { Name = "InGameExit" }
         );
-    if (!scriptDevFirst)
-        Patch(menu, "CreateInGameMenuPostfix");
+    var existing = menu.Controls.Select(button => (button, button.Position, button.Size)).ToArray();
+    Patch(menu, "RecreateControlsPostfix");
     var publish = menu.Controls.Single(button => button.Name == "ScriptDevPublish");
     var collisions = menu
         .Controls.Where(button => button != publish && Overlaps(publish, button))
         .Select(button => button.Name)
         .ToArray();
-    var unchanged = vanilla.All(pair =>
-        menu.Controls.Single(button => button.Name == pair.Key).Position.Equals(pair.Value)
+    var anchor = menu.Controls.Single(button =>
+        button.Name == (worldLoading ? "WorldLoading1" : "Options")
     );
-    var ok = collisions.Length == 0 && unchanged && publish.Position.Y - publish.Size.Y >= 0;
+    var gap = publish.Position.X - publish.Size.X / 2 - anchor.Position.X - anchor.Size.X / 2;
+    var anchored =
+        publish.Position.Y == anchor.Position.Y
+        && Math.Abs(gap - (0.06f - anchor.Size.Y)) < 0.0001f;
+    var allUnchanged = existing.All(item =>
+        item.button.Position.Equals(item.Position) && item.button.Size.Equals(item.Size)
+    );
+    var ok = collisions.Length == 0 && allUnchanged && anchored;
     Console.WriteLine(
-        $"{(ok ? "PASS" : "FAIL")} multiplayer={multiplayer}, InGameExit={inGameExit}, ScriptDevFirst={scriptDevFirst}: collisions=[{string.Join(", ", collisions)}], vanilla unchanged={unchanged}"
+        $"{(ok ? "PASS" : "FAIL")} multiplayer={multiplayer}, InGameExit={inGameExit}, WorldLoading={worldLoading}, anchored={anchored}: collisions=[{string.Join(", ", collisions)}], existing buttons unchanged={allUnchanged}"
     );
     if (!ok)
         failures++;
@@ -69,11 +81,15 @@ main.Controls.Add(
         Name = "LoadWorld",
     }
 );
-Patch(main, "CreateMainMenuPostfix");
+var mainLoadPosition = main.Controls[0].Position;
+var mainLoadSize = main.Controls[0].Size;
+Patch(main, "RecreateControlsPostfix");
 var load = main.Controls[0];
 var mainPublish = main.Controls[1];
 var mainOk =
-    mainPublish.Position.Y == load.Position.Y
+    load.Position.Equals(mainLoadPosition)
+    && load.Size.Equals(mainLoadSize)
+    && mainPublish.Position.Y == load.Position.Y
     && mainPublish.Position.X > load.Position.X
     && !Overlaps(mainPublish, load);
 Console.WriteLine($"{(mainOk ? "PASS" : "FAIL")} main menu: Publish beside Load Game");

@@ -10,9 +10,9 @@ In the main menu, the **Publish** button is to the right of **Load Game**.
 
 ![Publish button next to Load Game in the main menu](images/main-menu.png)
 
-In a game, press Escape: the button is above **Save**.
+In a game, press Escape: the button is to the right of **Load Game** when In Game World Loading is enabled, or to the right of **Options** otherwise.
 
-![Publish button above Save in the in-game menu](images/ingame-menu.png)
+![Publish button beside Load Game in the in-game menu](images/ingame-menu.png)
 
 ## The list
 
