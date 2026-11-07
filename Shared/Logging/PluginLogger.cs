@@ -25,7 +25,7 @@ namespace Shared.Logging
                 return;
 
             // Keen does not have a Trace log level, using Debug instead
-            MyLog.Default.Log(MyLogSeverity.Debug, Format(ex, message, data));
+            MyLog.Default.Log(MyLogSeverity.Debug, "{0}", Format(ex, message, data));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -34,7 +34,7 @@ namespace Shared.Logging
             if (!IsDebugEnabled)
                 return;
 
-            MyLog.Default.Log(MyLogSeverity.Debug, Format(ex, message, data));
+            MyLog.Default.Log(MyLogSeverity.Debug, "{0}", Format(ex, message, data));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -43,7 +43,7 @@ namespace Shared.Logging
             if (!IsInfoEnabled)
                 return;
 
-            MyLog.Default.Log(MyLogSeverity.Info, Format(ex, message, data));
+            MyLog.Default.Log(MyLogSeverity.Info, "{0}", Format(ex, message, data));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -52,7 +52,7 @@ namespace Shared.Logging
             if (!IsWarningEnabled)
                 return;
 
-            MyLog.Default.Log(MyLogSeverity.Warning, Format(ex, message, data));
+            MyLog.Default.Log(MyLogSeverity.Warning, "{0}", Format(ex, message, data));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -61,7 +61,7 @@ namespace Shared.Logging
             if (!IsErrorEnabled)
                 return;
 
-            MyLog.Default.Log(MyLogSeverity.Error, Format(ex, message, data));
+            MyLog.Default.Log(MyLogSeverity.Error, "{0}", Format(ex, message, data));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -70,7 +70,7 @@ namespace Shared.Logging
             if (!IsCriticalEnabled)
                 return;
 
-            MyLog.Default.Log(MyLogSeverity.Critical, Format(ex, message, data));
+            MyLog.Default.Log(MyLogSeverity.Critical, "{0}", Format(ex, message, data));
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
